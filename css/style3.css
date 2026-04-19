@@ -1,0 +1,175 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #f5f7fb;
+  color: #1e293b;
+}
+
+/* LAYOUT */
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CARD */
+.card {
+  width: 380px;
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* TEXT */
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 25px;
+}
+
+/* INPUT */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #2563eb;
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.resend-container {
+    margin-top: 15px;
+    font-size: 0.85rem; 
+    color: #94a3b8;   
+}
+
+.resend-link {
+    cursor: pointer;
+    color: #3b82f6;    
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.resend-link:hover {
+    text-decoration: underline;
+}
+
+.resend-link.disable {
+    color: #64748b; 
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#countdown {
+    font-size: 0.8rem;   
+    color: #94a3b8;       
+    opacity: 0.7;         
+    font-weight: normal;  
+    margin-left: 5px;
+}
+
+/* LINK */
+.link {
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* HEAD */
+.header-text {
+  margin-top: 20px;
+  font-size: 13px;
+  text-align: right;
+}
+
+/* FOOT */
+.footer-text {
+  margin-top: 20px;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* OTP */
+.otp-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.otp-input {
+  width: 45px;
+  height: 50px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+/* PASSWORD FIELD */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .input {
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #64748b;
+  user-select: none;
+}
+
+.toggle-password:hover {
+  color: #2563eb;
+}

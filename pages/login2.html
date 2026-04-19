@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/style3.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="title">Login</div>
+      <div class="subtitle">Welcome back</div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="text" class="input" id="email">
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+
+        <div class="password-wrapper">
+            <input type="password" class="input" id="password">
+            <span class="toggle-password" onclick="togglePassword()">👁</span>
+        </div>
+      </div>
+
+      <a href="/pages/forgot-password1.html" class="link">Forgot password?</a>
+
+      <button class="btn" id="btnLogin">Login</button>
+
+      <div class="footer-text">
+        Don't have account?
+        <a href="/pages/signup2.html" class="link">Sign up</a>
+      </div>
+    </div>
+  </div>
+    <script>
+        function togglePassword() {
+        const input = document.getElementById("password");
+
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+        }
+  </script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style3.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="title">Sign Up</div>
+      <div class="subtitle">Create your account</div>
+
+      <div class="input-group">
+        <label>Name</label>
+        <input type="text" class="input" id="name">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="text" class="input" id="email">
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        
+
+        <div class="password-wrapper">
+            <input type="password" class="input" id="newPassword">
+            <span class="toggle-password" onclick="togglePassword()">👁</span>
+        </div>
+        <small id="pass-msg"></small>
+      </div>
+
+      <button class="btn" id="btnSignup">Create Account</button>
+
+      <div class="footer-text">
+        Already have account?
+        <a href="/pages/login2.html" class="link">Login</a>
+      </div>
+    </div>
+  </div>
+  <script>
+        function togglePassword() {
+        const input = document.getElementById("newPassword");
+
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+        }
+  </script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>
