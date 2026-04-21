@@ -5,9 +5,11 @@ async function handleSignup() {
     const password = getVal("newPassword");
 
     if (!isPasswordStrong(password)){
-        return alert("Password not strong enough")    
+        return alert("Password not strong enough!");
     }
-
+    if (isValidEmail(email)){
+        return alert("Invalid email!");
+    }
     const result = await postData("/signup", { email, password });
     alert(result.message);
     if (result.success) window.location.href = "/pages/login2.html";
@@ -29,6 +31,7 @@ export function isPasswordStrong(password) {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])(?=.*\d).{8,}$/;
     return regex.test(password);
 }
+
 const passwordInput = document.getElementById("newPassword");
 if (passwordInput){
     passwordInput.oninput = (e) => {
@@ -43,6 +46,28 @@ if (passwordInput){
         }
     }
 }
+
+const emailInput = document.getElementById("email");
+if (emailInput){
+    emailInput.oninput = (e) => {
+        const msg = document.getElementById("email-msg");
+        if (!msg) return;
+        if (isValidEmail(e.target.value)){
+            msg.innerText = "Valid email";
+            msg.style.color = "green";
+        }
+        else {
+            msg.innerText = "Invalid email format, please enter a true email";
+            msg.style.color = "red";
+        }
+    }
+}
+
+export function isValidEmail(email){
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
 
 if (document.getElementById("btnSignup")) {
     document.getElementById("btnSignup").onclick = handleSignup;
