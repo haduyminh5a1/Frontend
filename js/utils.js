@@ -1,4 +1,4 @@
-const BASE_URL = "https://destruct-abruptly-applied.ngrok-free.dev";
+const BASE_URL = "https://saas-backend-0ynu.onrender.com";
 
 async function postData(endpoint, data) {
     try {

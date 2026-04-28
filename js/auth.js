@@ -7,7 +7,7 @@ async function handleSignup() {
     if (!isPasswordStrong(password)){
         return alert("Password not strong enough!");
     }
-    if (isValidEmail(email)){
+    if (!isValidEmail(email)){
         return alert("Invalid email!");
     }
     const result = await postData("/signup", { email, password });
