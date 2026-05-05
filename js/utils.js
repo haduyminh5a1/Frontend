@@ -1,18 +1,20 @@
 const BASE_URL = "https://saas-backend-0ynu.onrender.com";
 
-async function postData(endpoint, data) {
+async function handleLogin() {
+    const email = getVal("email");
+    const password = getVal("password");
+
     try {
-        const response = await fetch(`${BASE_URL}/api${endpoint}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json", 
-            },
-            body: JSON.stringify(data),
-        });
-        return await response.json();
-    } catch (error) {
-        console.error("Fetch error:", error);
-        return { success: false, message: "Can't connect to server" };
+        const result = await postData("/login", { email, password });
+        alert(result.message);
+        if (result.success) {
+            const token = result.token;
+            localStorage.setItem("token", token);
+            localStorage.setItem("userEmail", email);
+            window.location.href = `https://caiductien-dotcom.github.io/WEB-BASED-BATTLESHIP-GAME/?token=${token}`;
+        }
+    } catch (err) {
+        alert("Can't connect to server");
     }
 }
 

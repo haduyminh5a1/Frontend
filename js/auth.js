@@ -12,19 +12,34 @@ async function handleSignup() {
     }
     const result = await postData("/signup", { email, password });
     alert(result.message);
-    if (result.success) window.location.href = "/pages/login2.html";
+    if (result.success) window.location.href = "./pages/login2.html";
 }
 
 async function handleLogin() {
     const email = getVal("email");
     const password = getVal("password");
 
-    const result = await postData("/login", { email, password });
+    try {
+        const result = await postData("/login", { email, password });
+        alert(result.message);
+
+        if (result.success) {
+            const token = result.token;
+            localStorage.setItem("token", token);
+            localStorage.setItem("userEmail", email);
+
+            window.location.href = "./pages/home.html";
+        }
+    } catch (err) {
+        alert("Can't connect to backend server");
+    }
     alert(result.message);
     if (result.success) {
-        localStorage.setItem("userEmail", email);
-        window.location.href = "/pages/login2.html";
-    }
+    const token = result.token;
+    localStorage.setItem("token", token);
+    localStorage.setItem("userEmail", email);
+    window.location.href = "./pages/login2.html";
+}
 }
 
 export function isPasswordStrong(password) {

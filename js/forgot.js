@@ -70,7 +70,7 @@ async function handleForgotPassword() {
     
     if (result.success) {
         localStorage.setItem("resetEmail", email);
-        window.location.href = "reset-password.html";
+        window.location.href = "./pages/reset-password.html";
     }
 }
 
@@ -97,7 +97,7 @@ async function handleResetAllInOne() {
     alert(result.message);
     if (result.success) {
         localStorage.removeItem("resetEmail");
-        window.location.href = "login2.html"; 
+        window.location.href = "./pages/login2.html"; 
     }
 }
 
