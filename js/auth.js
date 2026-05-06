@@ -28,7 +28,7 @@ async function handleLogin() {
             localStorage.setItem("token", token);
             localStorage.setItem("userEmail", email);
 
-            window.location.href = "login2.html";
+            window.location.href = `${result.redirect}?token=${result.token}`;
         }
     } catch (err) {
         alert("Can't connect to backend server");
