@@ -25,7 +25,7 @@ async function handleLogin() {
 
         if (result.success) {
             const token = result.token;
-            localStorage.setItem("token", token);
+            localStorage.setItem("userToken", token);
             localStorage.setItem("userEmail", email);
 
             window.location.href = `${result.redirect}?token=${result.token}`;
