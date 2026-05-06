@@ -1,8 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0; url=./pages/login2.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = urlParams.get('token');
+
+    if (tokenFromUrl) {
+        localStorage.setItem("userToken", tokenFromUrl);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    if (!localStorage.getItem("userToken")) {
+        alert("Bạn chưa đăng nhập!");
+        window.location.href = "https://haduyminh5a1.github.io/Frontend/"; 
+    }
+</script>
 </head>
 <body>
+  
 </body>
 </html>
