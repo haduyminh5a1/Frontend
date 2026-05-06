@@ -38,7 +38,7 @@ async function handleLogin() {
     const token = result.token;
     localStorage.setItem("token", token);
     localStorage.setItem("userEmail", email);
-    window.location.href = "./pages/login2.html";
+    window.location.href = "login2.html";
 }
 }
 
