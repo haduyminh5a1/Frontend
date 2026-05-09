@@ -113,7 +113,7 @@ async function resendOTP() {
     const result = await postData("/resend-otp", { email });
     
     if (result.success) {
-        alert("A new OTP has been sent to your email!");
+        alert(result.message);
         initOTPSystem(); 
     } else {
         alert(result.message || "Failed to resend OTP.");
