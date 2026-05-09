@@ -12,11 +12,7 @@
         localStorage.setItem("userToken", tokenFromUrl);
         window.history.replaceState({}, document.title, window.location.pathname);
     }
-
-    if (!localStorage.getItem("userToken")) {
-        alert("Bạn chưa đăng nhập!");
-        window.location.href = "https://haduyminh5a1.github.io/Frontend/pages/login2.html"; 
-    }
+    window.location.href = "https://haduyminh5a1.github.io/Frontend/pages/login2.html"; 
 </script>
 </head>
 <body>
