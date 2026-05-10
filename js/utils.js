@@ -2,12 +2,12 @@ const BASE_URL = "https://saas-backend-0ynu.onrender.com";
 
 async function postData(endpoint, data) {
     try {
-        const token = localStorage.setItem("token");
+        const token = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/api${endpoint}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                ...(token && {"Authorization" : `Bearer ${token}`})
+                ...(token ? { "Authorization": `Bearer ${token}` } : {})
             },
             body: JSON.stringify(data),
         });
