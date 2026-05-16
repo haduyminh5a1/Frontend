@@ -2,7 +2,8 @@ const BASE_URL = "https://saas-backend-0ynu.onrender.com";
 
 async function postData(endpoint, data) {
     try {
-        const token = localStorage.getItem("token");
+        // Fix: dùng đúng key "userToken" nhất quán
+        const token = localStorage.getItem("userToken");
         const response = await fetch(`${BASE_URL}/api${endpoint}`, {
             method: "POST",
             headers: {
@@ -11,13 +12,19 @@ async function postData(endpoint, data) {
             },
             body: JSON.stringify(data),
         });
-        return await response.json();
+
+        const json = await response.json();
+        return json;
     } catch (error) {
         console.error("Fetch error:", error);
         return { success: false, message: "Can't connect to server" };
     }
 }
 
-const getVal = (id) => document.getElementById(id).value;
+// Fix: safe getVal - không throw nếu element không tồn tại
+const getVal = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+};
 
 export { postData, getVal };

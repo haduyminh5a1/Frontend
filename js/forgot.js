@@ -7,12 +7,11 @@ let otpExpiryTimer;
 function startResendCountdown(duration) {
     let timeLeft = duration;
     const btnResend = document.getElementById("btnResend");
-
     if (!btnResend) return;
 
     btnResend.classList.add("disable");
-    
     clearInterval(resendTimer);
+
     resendTimer = setInterval(() => {
         if (timeLeft <= 0) {
             clearInterval(resendTimer);
@@ -28,15 +27,14 @@ function startResendCountdown(duration) {
 function startOTPExpiryCountdown(duration) {
     let timeLeft = duration;
     const countdownDisplay = document.getElementById("countdown");
-
     if (!countdownDisplay) return;
 
     clearInterval(otpExpiryTimer);
     otpExpiryTimer = setInterval(() => {
         if (timeLeft <= 0) {
             clearInterval(otpExpiryTimer);
-            countdownDisplay.innerText = "OTP out of time!";
-            countdownDisplay.style.color = "#ff4b4b"; 
+            countdownDisplay.innerText = "OTP expired!";
+            countdownDisplay.style.color = "#ff4b4b";
         } else {
             countdownDisplay.innerText = `OTP valid time left: ${timeLeft}s`;
             timeLeft--;
@@ -45,8 +43,12 @@ function startOTPExpiryCountdown(duration) {
 }
 
 function initOTPSystem() {
-    startResendCountdown(30); 
+    startResendCountdown(30);
     startOTPExpiryCountdown(60);
+}
+
+if (document.getElementById("otp")) {
+    initOTPSystem();
 }
 
 const btnResend = document.getElementById("btnResend");
@@ -57,17 +59,14 @@ if (btnResend) {
     };
 }
 
-if (document.getElementById("otp")) {
-    initOTPSystem();
-}
-
 async function handleForgotPassword() {
     const email = getVal("email");
     if (!email) return alert("Please enter your email");
 
     const result = await postData("/forgot-password", { email });
-    alert(result.message);
-    
+    const msg = result.message || result.msg || (result.success ? "OTP sent!" : "Failed to send OTP.");
+    alert(msg);
+
     if (result.success) {
         localStorage.setItem("resetEmail", email);
         window.location.href = "reset-password.html";
@@ -76,47 +75,49 @@ async function handleForgotPassword() {
 
 async function handleResetAllInOne() {
     const email = localStorage.getItem("resetEmail");
-    const otp = getVal("otp"); 
+    const otp = getVal("otp");
     const newPassword = getVal("newPassword");
     const confirmPassword = getVal("confirmPassword");
 
-    if (!otp) return alert("Please enter OTP");
+    if (!email) {
+        alert("Session expired. Please request OTP again.");
+        return window.location.href = "forgot-password1.html";
+    }
+    if (!otp) {
+        return alert("Please enter OTP");
+    }
     if (!isPasswordStrong(newPassword)) {
-        alert("This password is not strong enough");
+        return alert("This password is not strong enough");
     }
     if (newPassword !== confirmPassword) {
-        return alert("Password does not match!");
+        return alert("Passwords do not match!");
     }
 
-    const result = await postData("/reset-password", { 
-        email, 
-        otp, 
-        newPassword 
-    });
+    const result = await postData("/reset-password", { email, otp, newPassword });
+    const msg = result.message || result.msg || (result.success ? "Password reset!" : "Reset failed.");
+    alert(msg);
 
-    alert(result.message);
     if (result.success) {
         localStorage.removeItem("resetEmail");
-        window.location.href = "login2.html"; 
+        window.location.href = "login2.html";
     }
 }
 
 async function resendOTP() {
-    const email = localStorage.getItem("resetEmail"); 
-    
+    const email = localStorage.getItem("resetEmail");
+
     if (!email) {
         alert("Session expired. Please enter your email again.");
-        window.location.href = "forgot-password.html";
+        window.location.href = "forgot-password1.html";
         return;
     }
 
     const result = await postData("/resend-otp", { email });
-    
+    const msg = result.message || result.msg || (result.success ? "OTP resent!" : "Failed to resend OTP.");
+    alert(msg);
+
     if (result.success) {
-        alert(result.message);
-        initOTPSystem(); 
-    } else {
-        alert(result.message || "Failed to resend OTP.");
+        initOTPSystem();
     }
 }
 
